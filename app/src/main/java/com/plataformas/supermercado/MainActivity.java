@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.plataformas.supermercado.DB.DBmanager;
+
 public class MainActivity extends AppCompatActivity {
 
     Button botonIngresar;
 
+    private DBmanager dBmanager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +23,20 @@ public class MainActivity extends AppCompatActivity {
         botonIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), productos.class));
+                startActivity(new Intent(getApplicationContext(), ProductosActivity.class));
             }
         });
+
+
+        //crear db inicial
+        dBmanager = new DBmanager(getApplicationContext());
+        dBmanager.open();
+
+        dBmanager.insertarProducto(1,"Leche",6300);
+        dBmanager.insertarProducto(2,"Galletas Saltín",3500);
+        dBmanager.insertarProducto(3,"Chocolate",5500);
+
+        dBmanager.close();
+
     }
 }
