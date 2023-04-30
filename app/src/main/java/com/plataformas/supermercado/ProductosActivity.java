@@ -30,7 +30,7 @@ public class ProductosActivity extends AppCompatActivity {
         //crear conexion
         dBmanager = new DBmanager(getApplicationContext());
         dBmanager.open();
-       // ArrayList<Producto> listadoProductos=dBmanager.leerProductos();
+        ArrayList<Producto> listadoProductos=dBmanager.leerProductos();
 
         botonNuevoProd.setOnClickListener(new View.OnClickListener() {
             @Override

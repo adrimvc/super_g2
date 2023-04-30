@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">supermercado</string>
     <string-array name="listado">
-        <item>Producto1</item>
-        <item>Producto2</item>
-        <item>Producto3</item>
+        <item>Leche</item>
+        <item>Pan</item>
+        <item>Queso</item>
     </string-array>
 </resources>

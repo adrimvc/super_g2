@@ -19,7 +19,7 @@ public class DBmanager {
     private static final String NOMBRE_PRODUCTO = "nombre";
     private static final String PRECIO = "precio";
 
-    ArrayList<Producto> lista;
+    ArrayList<Producto> lista = new ArrayList<>();
 
     public static final String PRODUCTO_CREATE =
             "create table producto (id integer not null, nombre text not null, precio integer not null);";
