@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.plataformas.supermercado.DB.DBmanager;
+import com.plataformas.supermercado.modelo.Producto;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,9 +33,13 @@ public class MainActivity extends AppCompatActivity {
         dBmanager = new DBmanager(getApplicationContext());
         dBmanager.open();
 
+        //INSERCION DIRECTA
         dBmanager.insertarProducto(1,"Leche",6300);
         dBmanager.insertarProducto(2,"Galletas Saltín",3500);
         dBmanager.insertarProducto(3,"Chocolate",5500);
+
+        //INSERCION MODELO
+        dBmanager.insertarModeloProducto(new Producto(4,"Pan Tajado",4500));
 
         dBmanager.close();
 

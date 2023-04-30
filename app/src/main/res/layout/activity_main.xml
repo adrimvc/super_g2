@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ligthblue"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Supermercado G2"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:autoSizeMinTextSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,10 +25,16 @@
 
     <Button
         android:id="@+id/btnIngresar"
-        android:layout_width="wrap_content"
+        android:layout_width="198dp"
         android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:gravity="center_horizontal"
         android:text="Ingresar"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeTextType="uniform"
         tools:layout_editor_absoluteX="157dp"
         tools:layout_editor_absoluteY="420dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</GridLayout>

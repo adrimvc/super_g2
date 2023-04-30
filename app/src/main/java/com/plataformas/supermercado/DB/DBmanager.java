@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import android.util.Log;
 
+import com.plataformas.supermercado.modelo.Producto;
+
 public class DBmanager {
 
     public static final String TABLA_PRODUCTOS="producto";
@@ -44,6 +46,22 @@ public class DBmanager {
 
         this._db.insert(TABLA_PRODUCTOS,null,contentValues);
         Log.d("insert","Registro insertado "+nombre);
+    }
+
+    public boolean insertarModeloProducto(Producto p) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_PRODUCTO,p.getId());
+        contentValues.put(NOMBRE_PRODUCTO,p.getNombre());
+        contentValues.put(PRECIO,p.getPrecio());
+
+        long resultado = _db.insert(TABLA_PRODUCTOS,null,contentValues);
+
+        if(resultado==-1){
+            Log.d("insert","Error al insertar "+p.getNombre());
+            return false;
+        }
+        Log.d("insert","Registro insertado "+p.getNombre());
+        return true;
     }
 
 }
