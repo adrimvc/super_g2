@@ -27,7 +27,7 @@ public class ModificarProducto extends AppCompatActivity {
 
         nombreEdittext = findViewById(R.id.edittextonombre);
         precioEdittext = findViewById(R.id.edittextoprecio);
-        guardarButton = findViewById(R.id.btnadd);
+        guardarButton = findViewById(R.id.btnGuardar);
 
         // Instanciar DBmanager
         dBmanager = new DBmanager(getApplicationContext());
@@ -39,7 +39,7 @@ public class ModificarProducto extends AppCompatActivity {
             producto = dBmanager.obtenerProductoPorId(idProducto);
         } else {
             // Crear nuevo producto si no se ha pasado un ID válido
-            producto = new Producto();
+            producto = null;
         }
 
         nombreEdittext.setText(producto.getNombre());

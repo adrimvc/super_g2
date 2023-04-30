@@ -22,4 +22,16 @@ public class Producto {
     public int getPrecio() {
         return precio;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
 }
