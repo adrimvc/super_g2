@@ -2,6 +2,7 @@ package com.plataformas.supermercado.DB;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -63,5 +64,65 @@ public class DBmanager {
         Log.d("insert","Registro insertado "+p.getNombre());
         return true;
     }
+    public class Producto {
+        private int id;
+        private String nombre;
+        private int precio;
+
+        public Producto(int id, String nombre, int precio) {
+            this.id = id;
+            this.nombre = nombre;
+            this.precio = precio;
+        }
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public int getPrecio() {
+            return precio;
+        }
+
+        public void setPrecio(int precio) {
+            this.precio = precio;
+        }
+    }
+    public void actualizarModeloProducto(Producto p) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NOMBRE_PRODUCTO, p.getNombre());
+        contentValues.put(PRECIO, p.getPrecio());
+
+        SQLiteDatabase db = this._db;
+        db.update(TABLA_PRODUCTOS, contentValues, ID_PRODUCTO + "=?", new String[]{String.valueOf(p.getId())});
+        db.close();
+    }
+    public Producto obtenerProductoPorId(int idProducto) {
+        Producto producto = null;
+        SQLiteDatabase db = this._db();
+        String selectQuery = "SELECT * FROM " + TABLA_PRODUCTOS + " WHERE " + ID_PRODUCTO + " = " + idProducto;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            producto = new Producto();
+            producto.setId(cursor.getInt(((Cursor) cursor).getColumnIndex(ID_PRODUCTO)));
+            producto.setNombre(cursor.getString(cursor.getColumnIndex(NOMBRE_PRODUCTO)));
+            producto.setPrecio(cursor.getInt(cursor.getColumnIndex(PRECIO)));
+        }
+        cursor.close();
+        db.close();
+        return producto;
+    }
+
+
 
 }
