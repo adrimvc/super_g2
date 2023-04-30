@@ -3,6 +3,13 @@ package com.plataformas.supermercado;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.plataformas.supermercado.DB.DBmanager;
+import com.plataformas.supermercado.modelo.Producto;
+
 public class ModificarProducto extends AppCompatActivity {
 
     EditText nombreEdittext;
@@ -11,19 +18,28 @@ public class ModificarProducto extends AppCompatActivity {
 
     Producto producto;
 
+    private DBmanager dBmanager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_producto);
 
-        nombreEdittext = findViewById(R.id.editTextNombre);
-        precioEdittext = findViewById(R.id.editTextPrecio);
-        guardarButton = findViewById(R.id.guardarButton);
+        nombreEdittext = findViewById(R.id.edittextonombre);
+        precioEdittext = findViewById(R.id.edittextoprecio);
+        guardarButton = findViewById(R.id.btnadd);
 
+        // Instanciar DBmanager
+        dBmanager = new DBmanager(getApplicationContext());
+        dBmanager.open();
 
         int idProducto = getIntent().getIntExtra("idProducto", -1);
         if (idProducto != -1) {
-            producto = DBmanager.obtenerProductoPorId(idProducto);
+            // Obtener producto por ID
+            producto = dBmanager.obtenerProductoPorId(idProducto);
+        } else {
+            // Crear nuevo producto si no se ha pasado un ID válido
+            producto = new Producto();
         }
 
         nombreEdittext.setText(producto.getNombre());
@@ -35,7 +51,10 @@ public class ModificarProducto extends AppCompatActivity {
                 producto.setNombre(nombreEdittext.getText().toString());
                 producto.setPrecio(Integer.parseInt(precioEdittext.getText().toString()));
 
-                DBmanager.actualizarModeloProducto(producto);
+                dBmanager.actualizarModeloProducto(producto);
+
+                // Cerrar DBmanager
+                dBmanager.close();
 
                 finish();
             }

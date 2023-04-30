@@ -5,29 +5,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.plataformas.supermercado.DB.DBmanager;
+import com.plataformas.supermercado.modelo.Producto;
 
 public class NuevoProducto extends AppCompatActivity {
+
+    EditText idEdittext;
+    EditText nombreEdittext;
+    EditText precioEdittext;
+    Button guardarButton;
+
+    private DBmanager dBmanager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_producto);
-        TextView id=(TextView)findViewById(R.id.TextView3);
-        TextView nombre=(TextView)findViewById(R.id.edittextonombre);
-        TextView precio=(TextView)findViewById(R.id.edittextoprecio);
-        Button btnInsert=(Button)findViewById(R.id.btnIngresar);
 
-        btnInsert.setOnClickListener(new View.OnClickListener() {
+        idEdittext = findViewById(R.id.edittextoid);
+        nombreEdittext = findViewById(R.id.edittextonombre);
+        precioEdittext = findViewById(R.id.edittextoprecio);
+        guardarButton = findViewById(R.id.btnadd);
+
+        // Instanciar DBmanager
+        dBmanager = new DBmanager(getApplicationContext());
+        dBmanager.open();
+
+        guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBmanager dbManager = new DBmanager(getApplicationContext());
-                dbManager.open();
-                Producto producto = new Producto(Integer.parseInt(id.getText().toString()), nombre.getText().toString(), Integer.parseInt(precio.getText().toString()));
-                dbManager.insertarModeloProducto(producto);
-                dbManager.close();
+                Producto producto = new Producto(Integer.parseInt(idEdittext.getText().toString()), nombreEdittext.getText().toString(), Integer.parseInt(precioEdittext.getText().toString()));
+                dBmanager.insertarModeloProducto(producto);
+
+                // Cerrar DBmanager
+                dBmanager.close();
+
+                finish();
             }
         });
     }
