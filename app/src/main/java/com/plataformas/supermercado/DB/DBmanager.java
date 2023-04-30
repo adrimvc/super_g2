@@ -10,12 +10,16 @@ import android.util.Log;
 
 import com.plataformas.supermercado.modelo.Producto;
 
+import java.util.ArrayList;
+
 public class DBmanager {
 
     public static final String TABLA_PRODUCTOS = "producto";
     private static final String ID_PRODUCTO = "id";
     private static final String NOMBRE_PRODUCTO = "nombre";
     private static final String PRECIO = "precio";
+
+    ArrayList<Producto> lista;
 
     public static final String PRODUCTO_CREATE =
             "create table producto (id integer not null, nombre text not null, precio integer not null);";
@@ -37,6 +41,21 @@ public class DBmanager {
 
     public void close() {
         _conexion.close();
+    }
+
+    public ArrayList<Producto> leerProductos () {
+        //lista.clear();
+        Cursor cursor=_db.rawQuery("select * from producto", null);
+        if(cursor!=null && cursor.getCount()>0){
+            cursor.moveToFirst();
+            do{
+                lista.add(new Producto( cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2)
+                ));
+            }while (cursor.moveToNext());
+        }
+        return lista;
     }
 
     public void insertarProducto(int id, String nombre, int precio) {
