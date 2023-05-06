@@ -59,6 +59,8 @@ public class ModificarProducto extends AppCompatActivity {
                     dBmanager.open();
                     dBmanager.actualizarModeloProducto(producto);
 
+                    Toast.makeText(getApplication(), "Producto modificado!", Toast.LENGTH_SHORT).show();
+
                     // Cerrar DBmanager
                     dBmanager.close();
                 }catch(Exception e){

@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.plataformas.supermercado.DB.DBmanager;
 import com.plataformas.supermercado.modelo.Producto;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,13 +36,20 @@ public class MainActivity extends AppCompatActivity {
         dBmanager = new DBmanager(getApplicationContext());
         dBmanager.open();
 
-        //INSERCION DIRECTA
-        dBmanager.insertarProducto(1,"Leche",6300);
-        dBmanager.insertarProducto(2,"Galletas Saltín",3500);
-        dBmanager.insertarProducto(3,"Chocolate",5500);
+        ArrayList<Producto> listadoProductos=dBmanager.leerProductos();
 
-        //INSERCION MODELO
-        dBmanager.insertarModeloProducto(new Producto(4,"Pan Tajado",4500));
+        if (listadoProductos.size()<4){
+            //INSERCION DIRECTA
+            dBmanager.insertarProducto(1,"Leche",6300);
+            dBmanager.insertarProducto(2,"Galletas Saltín",3500);
+            dBmanager.insertarProducto(3,"Chocolate",5500);
+
+            //INSERCION MODELO
+            dBmanager.insertarModeloProducto(new Producto(4,"Pan Tajado",4500));
+        }else{
+            //limpiar todos los productos insertados en las pruebas!
+            //dBmanager.limpiarProductos();
+        }
 
         dBmanager.close();
 

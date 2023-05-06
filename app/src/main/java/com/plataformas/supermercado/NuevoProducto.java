@@ -41,9 +41,10 @@ public class NuevoProducto extends AppCompatActivity {
                     Producto producto = new Producto(Integer.parseInt(idEdittext.getText().toString()), nombreEdittext.getText().toString(), Integer.parseInt(precioEdittext.getText().toString()));
                     dBmanager.open();
                     dBmanager.insertarModeloProducto(producto);
-
+                    Toast.makeText(getApplication(), "Producto insertado!", Toast.LENGTH_SHORT).show();
                     // Cerrar DBmanager
                     dBmanager.close();
+
                 }catch(Exception e){
                     Toast.makeText(getApplication(),"ERROR", Toast.LENGTH_SHORT).show();
                 }
