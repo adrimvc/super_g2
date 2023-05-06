@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.plataformas.supermercado.ModificarProducto;
+import com.plataformas.supermercado.NuevoProducto;
 import com.plataformas.supermercado.R;
 import com.plataformas.supermercado.modelo.Producto;
 
@@ -29,6 +35,7 @@ public class adaptador extends BaseAdapter {
         this.lista = lista;
         this.a=a;
         this._db=db;
+        this.contexto = a.getApplicationContext();
     }
 
     public adaptador(Context contexto, int R_layout_IdView, ArrayList<Producto> lista) {
@@ -56,6 +63,22 @@ public class adaptador extends BaseAdapter {
         ImageButton editar = (ImageButton) v.findViewById(R.id.btnEditar);
 
         ImageButton eliminar = (ImageButton) v.findViewById(R.id.btnEliminar);
+
+        editar.setTag(posicion);
+        eliminar.setTag(posicion);
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(contexto, ModificarProducto.class);
+               contexto.startActivity(intent);
+            }
+        });
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return v;
     }

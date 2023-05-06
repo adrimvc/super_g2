@@ -3,6 +3,7 @@ package com.plataformas.supermercado;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +24,13 @@ public class ProductosActivity extends AppCompatActivity {
     ImageButton botonNuevoProd;
     ListView listadoProd;
 
+    Button botonEditar;
+
     private DBmanager dBmanager;
 
     @SuppressLint("MissingInflatedId")
-    @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
@@ -50,5 +54,17 @@ public class ProductosActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        listadoProd =  (ListView) findViewById(R.id.listado);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        listadoProd =  (ListView) findViewById(R.id.listado);
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.plataformas.supermercado.DB.DBmanager;
 import com.plataformas.supermercado.modelo.Producto;
@@ -31,17 +32,21 @@ public class NuevoProducto extends AppCompatActivity {
 
         // Instanciar DBmanager
         dBmanager = new DBmanager(getApplicationContext());
-        dBmanager.open();
 
         guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Producto producto = new Producto(Integer.parseInt(idEdittext.getText().toString()), nombreEdittext.getText().toString(), Integer.parseInt(precioEdittext.getText().toString()));
-                dBmanager.insertarModeloProducto(producto);
 
-                // Cerrar DBmanager
-                dBmanager.close();
+                try{
+                    Producto producto = new Producto(Integer.parseInt(idEdittext.getText().toString()), nombreEdittext.getText().toString(), Integer.parseInt(precioEdittext.getText().toString()));
+                    dBmanager.open();
+                    dBmanager.insertarModeloProducto(producto);
 
+                    // Cerrar DBmanager
+                    dBmanager.close();
+                }catch(Exception e){
+                    Toast.makeText(getApplication(),"ERROR", Toast.LENGTH_SHORT).show();
+                }
                 finish();
             }
         });
