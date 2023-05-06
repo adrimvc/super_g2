@@ -37,7 +37,7 @@ public class ModificarProducto extends AppCompatActivity {
         dBmanager.open();
 
         int idProducto = getIntent().getIntExtra("idProducto", -1);
-        idProducto=1;
+
         if (idProducto != -1) {
             // Obtener producto por ID
             producto = dBmanager.obtenerProductoPorId(idProducto);
