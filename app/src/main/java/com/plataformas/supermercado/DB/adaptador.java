@@ -69,8 +69,10 @@ public class adaptador extends BaseAdapter {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(contexto, ModificarProducto.class);
-               contexto.startActivity(intent);
+                p=lista.get((Integer) v.getTag());
+                Intent intent = new Intent(contexto, ModificarProducto.class);
+                intent.putExtra("idProducto", p.getId());
+                contexto.startActivity(intent);
             }
         });
         eliminar.setOnClickListener(new View.OnClickListener() {

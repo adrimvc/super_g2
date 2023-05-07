@@ -93,6 +93,12 @@ public class DBmanager {
         db.update(TABLA_PRODUCTOS, contentValues, ID_PRODUCTO + "=?", new String[]{String.valueOf(p.getId())});
         db.close();
     }
+    public void limpiarProductos() {
+        SQLiteDatabase db = this._db;
+        db.execSQL("DELETE FROM "+TABLA_PRODUCTOS);
+        db.close();
+    }
+
 
     @SuppressLint("Range")
     public Producto obtenerProductoPorId(int idProducto) {

@@ -25,12 +25,13 @@
 
     <ListView
         android:id="@+id/listado"
-        android:layout_width="341dp"
-        android:layout_height="352dp"
+        android:layout_width="329dp"
+        android:layout_height="395dp"
         android:layout_margin="30dp"
         android:entries="@array/listado"
         android:gravity="center"
         android:padding="10dp"
+        android:scrollbars="vertical"
         android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
